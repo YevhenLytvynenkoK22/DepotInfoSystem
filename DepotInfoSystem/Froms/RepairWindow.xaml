@@ -1,0 +1,136 @@
+﻿<Window x:Class="DepotInfoSystem.Froms.RepairWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Створення ремонту" Height="994" Width="720"
+        FontFamily="Segoe UI" Background="#FFF9FAFB"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#B22222"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#E8E8E8"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#F5F5F5"/>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="Margin" Value="0,8,0,4"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+           
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+           
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="6" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Label Content="ID ремонту:"/>
+                <TextBox x:Name="RepairIdTextBox" IsReadOnly="True" Text="{Binding Path=RepairId, Mode=OneWay}"/>
+
+                <Label Content="Потяг:"/>
+                <ComboBox x:Name="TrainComboBox" DisplayMemberPath="FullInfo" SelectedValuePath="id"/>
+
+                <Label Content="Тип ремонту:"/>
+                <ComboBox x:Name="RepairTypeComboBox" DisplayMemberPath="Name" SelectedValuePath="id"/>
+
+                <Separator Margin="0,15"/>
+
+                <TextBlock Text="Бригада" FontSize="16" FontWeight="Bold" Margin="0,10,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <TextBlock Text="У бригаді" HorizontalAlignment="Center"/>
+                        <ListBox x:Name="InBrigadeListBox" Width="200" Height="150" 
+                                 DisplayMemberPath="FullName" SelectionMode="Extended"/>
+                    </StackPanel>
+                    <StackPanel Margin="10,0" VerticalAlignment="Center">
+                        <Button Content="&gt;" Width="40" Click="RemoveFromBrigade_Click"/>
+                        <Button Content="&lt;" Width="40" Click="AddToBrigade_Click"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <TextBlock Text="Не в бригаді" HorizontalAlignment="Center"/>
+                        <ListBox x:Name="NotInBrigadeListBox" Width="200" Height="150" 
+                                 DisplayMemberPath="FullName" SelectionMode="Extended"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Separator Margin="0,15"/>
+
+                <Label Content="Користувач:"/>
+                <ComboBox x:Name="UserComboBox" DisplayMemberPath="Login" SelectedValuePath="id"/>
+
+                <Label Content="Дата:"/>
+                <DatePicker x:Name="DateTextBox"/>
+
+                <Label Content="Опис:"/>
+                <TextBox x:Name="DescriptionTextBox" AcceptsReturn="True" Height="60" TextWrapping="Wrap"/>
+
+                <Label Content="Статус:"/>
+                <ComboBox x:Name="StatusTextBox">
+                    <ComboBoxItem Content="Виконується"/>
+                    <ComboBoxItem Content="Завершено"/>
+                    <ComboBoxItem Content="Скасовано"/>
+                    <ComboBoxItem Content="Очікує на затвердження"/>
+                    <ComboBoxItem Content="Затверджено"/>
+                    <ComboBoxItem Content="Відхилено"/>
+                    <ComboBoxItem Content="На перевірці"/>
+                    <ComboBoxItem Content="Виконано"/>
+                    <ComboBoxItem Content="Відкладено"/>
+                    <ComboBoxItem Content="Відновлено"/>
+                </ComboBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Зберегти" Width="120" Click="Save_Click"/>
+            <Button Content="Скасувати" Width="120" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

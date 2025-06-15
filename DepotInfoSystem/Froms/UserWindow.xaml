@@ -1,0 +1,100 @@
+﻿<Window x:Class="DepotInfoSystem.Froms.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DepotInfoSystem.Froms"
+        mc:Ignorable="d"
+      Title="Редагування користувача" Height="300" Width="400">
+    <Window.Resources>
+        <!-- Використовуй цей блок, якщо не переніс стилі в App.xaml -->
+        <SolidColorBrush x:Key="PrimaryColor" Color="#B22222"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#E8E8E8"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+
+        <!-- Стиль кнопки -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#8B1A1A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#660000"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#DDDDDD"/>
+                                <Setter Property="Foreground" Value="#999999"/>
+                                <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Стиль текстових полів -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Логін:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding _user.Login, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <TextBlock Text="Пароль:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding _user.Password, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <TextBlock Text="Роль:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Roles}" DisplayMemberPath="Name" SelectedValuePath="id"
+                  SelectedValue="{Binding _user.RoleID, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+
+        <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Зберегти" Width="100" Margin="5" Click="SaveButton_Click"/>
+            <Button Content="Скасувати" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
