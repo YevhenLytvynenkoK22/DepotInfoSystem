@@ -83,39 +83,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="db_control.xaml">
+    <Page Include="Views\db_control.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\EmployeeWindow.xaml">
+    <Page Include="Views\EmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\RepairWindow.xaml">
+    <Page Include="Views\RepairWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\RoleWindow.xaml">
+    <Page Include="Views\RoleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\TrainWindow.xaml">
+    <Page Include="Views\TrainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\UserWindow.xaml">
+    <Page Include="Views\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Froms\WarehouseWindow.xaml">
+    <Page Include="Views\WarehouseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -124,42 +124,58 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ApplicationContext.cs" />
-    <Compile Include="EntityTemplateSelector.cs" />
-    <Compile Include="Froms\EmployeeWindow.xaml.cs">
+    <Compile Include="Utilities\ApplicationContext.cs" />
+    <Compile Include="Utilities\EntityTemplateSelector.cs" />
+    <Compile Include="Utilities\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Utilities\DataService.cs" />
+    <Compile Include="Utilities\IDataService.cs" />
+    <Compile Include="Utilities\ObservableObject.cs" />
+    <Compile Include="Utilities\PasswordBoxAssistant.cs" />
+    <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="ViewModels\DbControlViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\PermissionItemViewModel.cs" />
+    <Compile Include="ViewModels\RepairViewModel.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
+    <Compile Include="ViewModels\TrainViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\WarehouseViewModel.cs" />
+    <Compile Include="Views\EmployeeWindow.xaml.cs">
       <DependentUpon>EmployeeWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Froms\RepairWindow.xaml.cs">
+    <Compile Include="Views\RepairWindow.xaml.cs">
       <DependentUpon>RepairWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Froms\RoleWindow.xaml.cs">
+    <Compile Include="Views\RoleWindow.xaml.cs">
       <DependentUpon>RoleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Froms\TrainWindow.xaml.cs">
+    <Compile Include="Views\TrainWindow.xaml.cs">
       <DependentUpon>TrainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Froms\UserWindow.xaml.cs">
+    <Compile Include="Views\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Froms\WarehouseWindow.xaml.cs">
+    <Compile Include="Views\WarehouseWindow.xaml.cs">
       <DependentUpon>WarehouseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Brigade.cs" />
-    <Compile Include="Model\Employee.cs" />
-    <Compile Include="Model\Repair.cs" />
-    <Compile Include="Model\RepairType.cs" />
-    <Compile Include="Model\Role.cs" />
-    <Compile Include="Model\Spare.cs" />
-    <Compile Include="Model\Train.cs" />
-    <Compile Include="Model\User.cs" />
-    <Compile Include="Model\Warehouse.cs" />
-    <Compile Include="db_control.xaml.cs">
+    <Compile Include="Models\Brigade.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Repair.cs" />
+    <Compile Include="Models\RepairType.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Spare.cs" />
+    <Compile Include="Models\Train.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Warehouse.cs" />
+    <Compile Include="Views\db_control.xaml.cs">
       <DependentUpon>db_control.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -182,6 +198,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
     <None Include="database.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -207,6 +224,7 @@
   <ItemGroup>
     <Resource Include="train.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

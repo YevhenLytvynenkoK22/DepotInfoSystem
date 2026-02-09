@@ -1,0 +1,138 @@
+﻿<Window x:Class="DepotInfoSystem.Froms.TrainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:DepotInfoSystem.ViewModels"
+        mc:Ignorable="d"
+        Title="Locomotives"
+        Height="397" Width="444"
+        WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance viewModels:TrainViewModel}">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#B22222"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#E8E8E8"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#F5F5F5"/>
+        <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource ButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#8B1A1A"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#660000"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#DDDDDD"/>
+                    <Setter Property="Foreground" Value="#999999"/>
+                    <Setter Property="BorderBrush" Value="#CCCCCC"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="6"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Setter Property="Padding" Value="6"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Width="100" Height="120" BorderBrush="Gray" BorderThickness="1"
+                HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,10" Background="White">
+            <Image Source="{Binding PhotoImageSource}" Stretch="Uniform"/>
+        </Border>
+        <Button Grid.Row="0" Content="Photo" HorizontalAlignment="Left"
+        VerticalAlignment="Bottom" Margin="110,0,0,10" Width="71"
+        Command="{Binding SelectPhotoCommand}" Height="35"/>
+
+        <Label Grid.Row="1" Content="Model:"/>
+        <TextBox Grid.Row="1" Margin="60,0,0,5"
+                 Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"
+                 Width="300" HorizontalAlignment="Right"/>
+
+        <Label Grid.Row="2" Content="Number:"/>
+        <TextBox Grid.Row="2" Margin="60,0,0,5"
+                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
+                 Width="300" HorizontalAlignment="Right"/>
+
+        <Label Grid.Row="3" Content="Manufacture Year:"/>
+        <ComboBox Grid.Row="3" Width="300" VerticalAlignment="Center" HorizontalAlignment="Right"
+                  ItemsSource="{Binding AvailableYears}"
+                  SelectedItem="{Binding ManufactureYear, Mode=TwoWay}"/>
+
+        <Label Grid.Row="4" Content="Mileage (km):"/>
+        <TextBox Grid.Row="4" Margin="0,0,0,5"
+                 Text="{Binding Mileage, UpdateSourceTrigger=PropertyChanged}"
+                 Width="300" HorizontalAlignment="Right"/>
+
+        <Label Grid.Row="5" Content="Status:"/>
+        <ComboBox Grid.Row="5" Margin="60,0,0,5"
+                  ItemsSource="{Binding AvailableStatuses}"
+                  SelectedItem="{Binding CurrentStatus, Mode=TwoWay}"
+                  Width="300" HorizontalAlignment="Right"/>
+
+        <StackPanel Grid.Row="8" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="Save" Width="100" Margin="0,0,10,0"
+                    Command="{Binding SaveCommand}" IsDefault="True"/>
+            <Button Content="Cancel" Width="100" IsCancel="True"
+                    Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>
